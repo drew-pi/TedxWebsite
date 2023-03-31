@@ -1,1 +1,1 @@
-domain: https://tedx.mad_vetements.tech
+domain: https://tedx.mad-vetements.tech
