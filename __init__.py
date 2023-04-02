@@ -24,17 +24,19 @@ def page():
     # creating a file that can be pushed to the html template
     for f in files:
         data[f[:-4]] = db.parse_text(f)
-
+        if f == "pow.txt":
+            data[f[:-4]][0] = data[f[:-4]][0].split("\n")
     # for bug fixing - to see what files are showing up
     # keys = list(data.keys())
     # print (keys)
+    pprint(data)
 
 
     return render_template("home_page.html", data=data, resources=resources)
 
 @app.route("/onepager/faqs")
 def faq():
-    return "this is an faq page"
+    return "coming soon"
 
 @app.route("/onepager/citations")
 def cite():

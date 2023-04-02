@@ -23,21 +23,25 @@
         <!-- Table of contents here -->
         <div> 
             <h4>Table of Contents</h4>
-            <ol>
+            <ol type="i">
                 <div>
-                    <li>Ted Talk Outline</li>
-                    <ol href="">
-                        <li href="">Transactions</li>
-                        <li href="">Signitures and ECDSA</li>
-                        <li href="">Proof of Work</li>
-                        <li href="">Proof of Stake</li>
-                        <li href="">Blockchain Uses</li>
+                    <a href="#outline"><li>Ted Talk Outline</li></a>
+                    <ol type="i">
+                        <a href="#transactions"><li>Transactions</li></a>
+                        <ul>
+                            <a href="#sign"><li>Signitures and ECDSA</li></a>
+                            <a href="#time"><li>Timestamps</li></a>
+                            <a href="#time"><li>Buy in</li></a>
+                        </ul>
+                        <a href="#pow"><li>Proof of Work</li></a>
+                        <a href="#pos"><li>Proof of Stake</li></a>
+                        <a href="#uses"><li>Blockchain Uses</li></a>
                     </ol>
                 </div>
-                <li href="">Implementing Blockchain</li>
-                <li href="">More Resources</li>
-                <li href="">FAQ</li>
-                <li href="">Citations</li>
+                <a href="#implement"><li>Implementing Blockchain</li></a>
+                <a href="#more"><li>More Resources</li></a>
+                <a href="/onepager/faqs"><li>FAQ</li></a>
+                <a href="/onepager/citations"><li>Citations</li></a>
             </ol>
         </div>
         
@@ -45,61 +49,65 @@
         <div>
             <!-- Ted talk -->
             <div>
-                <h4>Ted Talk Outline</h4>
+                <h4 id="outline">Ted Talk Outline</h4>
 
                 <!-- Transactions -->
                 <div>
 
-                    <h5>Transactions</h5>
-                    <p>The three elements</p>
+                    <h5 id="transactions">Transactions: The three elements</h5>
+
+                    <!-- Signatures -->
+                    <div>
+
+                        <h6 id="sign">Signature and ECDSA</h6>
+
+                        <div class="row">
+                            <div class="col-sm-5">
+                                <p>What is a signature</p>
+                                <p> {{  data["signatures"][0]  }}</p>
+                            </div>
+                            <div class="col-sm-7">
+                                <p>How does the Eliptic Curve Digital Signature Algorithm (ECDSA) work</p>
+                                <p> {{  data["signatures"][1]  }} </p> 
+                                <div> 
+                                    <p>Some resources linked</p>
+                                    <ul>
+                                        {% for r in resources %}
+                                            {% if r[3] == "signature"  %}  
+                                                <a href={{r[0]}}><li> {{ r[1] }}:</a> {{ r[2] }} </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End signatures -->
+
+                    <h6 id="time"> Timestamps and Buying in</h6>
 
                     <div class="row">
                         {% for paragraph in data["transactions"] %}
-                            <div class="col-sm-4"> {{ paragraph }} </div>
+                            <div class="col-sm-6"> {{ paragraph }} </div>
                         {% endfor %}
                     </div>
                 </div>
                 <!-- End Transactions -->
 
-                <!-- Signatures -->
-                <div>
-
-                    <h5>Signature and ECDSA</h5>
-
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <p>What is a signature</p>
-                            <p> {{  data["signatures"][0]  }}</p>
-                        </div>
-                        <div class="col-sm-8">
-                            <p>How does the Eliptic Curve Digital Signature Algorithm (ECDSA) work</p>
-                            <p> {{  data["signatures"][1]  }} </p> 
-                            <div> 
-                                <p>Some resources linked</p>
-                                <ul>
-                                    {% for r in resources %}
-                                        {% if r[3] == "signature"  %}  
-                                            <a href={{r[0]}}><li> {{ r[1] }}:</a> {{ r[2] }} </li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <!-- End signatures -->
-
                 <!-- Proof of Work -->
                 <div>
 
-                    <h5>How does Proof of Work, work</h5>
+                    <h5 id="pow">How does Proof of Work, work</h5>
                     <p>And why do we need it</p>
 
                     <div class="row">
                         <div class="col-sm-4">
-                            <p>Why do we need Proof of Work</p>
-                            <p> {{ data["pow"][0] }}</p>
+                            <p>Defining a few terms</p>
+
+                            {% for term in data["pow"][0] %}
+                                <p> {{ term }}</p>
+                            {% endfor %}
                         </div>
                         <div class="col-sm-8">
                             <p>How does it work</p>
@@ -123,10 +131,10 @@
                 <!-- Proof of stake -->
                 <div>
 
-                    <h5>What is Proof of Stake</h5>
+                    <h5 id="pos">What is Proof of Stake</h5>
 
                     <div class="row">
-                        <div class="col-sm-8">
+                        <div class="col-sm-5">
                             <p>How does Proof of Stake work</p>
                             <p> {{ data["pos"][0] }}</p>
 
@@ -141,7 +149,7 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                        <div class="col-sm-7">
                             <p>Advantages and Disadvantages</p>
                             <p> {{ data["pos"][1] }}</p>
                         </div>
@@ -152,7 +160,7 @@
 
                 <!-- Uses -->
                 <div>
-                    <h5>Whats the point of a Blockchain</h5>
+                    <h5 id="uses">Whats the point of a Blockchain</h5>
 
                     <div class="row">
                         <div class="col-sm-8">
@@ -160,7 +168,7 @@
                             <p> {{ data["uses"][0] }}</p>
                         </div>
                         <div class="col-sm-4">
-                            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1DIw0tt-je0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/aQWflNQuP_o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
                     </div>
 
@@ -174,16 +182,14 @@
             <!-- Implementing blockchain -->
             <div>
 
-                <h5>Implementing Blockchain technology into your Application</h5>
+                <h5 id="implement">Implementing Blockchain technology into your Application</h5>
 
                 <div class="row">
                     <div class="col-sm-8">
-                        <p>Paragraph describing a little about implementation of blockchains</p>
                         <p> {{ data["implementation"][0] }}</p>
                     </div>
                     <div class="col-sm-4">
-                        <p>demonstation</p>
-                        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1DIw0tt-je0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/zVqczFZr124" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                 </div>
 
@@ -195,7 +201,7 @@
             <!-- More Resources -->
             <div>
 
-                <h5>More Resources</h5>
+                <h5 id="more">More Resources</h5>
 
                 <ul>
                     {% for r in resources %}
